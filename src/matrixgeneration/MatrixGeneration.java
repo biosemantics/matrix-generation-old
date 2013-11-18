@@ -150,11 +150,11 @@ public class MatrixGeneration extends ProcessSubject {
     
     
     public static void main(String[] args) throws Exception {
-    	//String input = args[0];
-    	//String output = args[1];
+    	String input = args[0];
+    	String output = args[1];
     	
-    	String input = "input";
-    	String output = "output";
+    	//String input = "input";
+    	//String output = "output";
     	
     	FileName2TaxonLoader filename2Taxonloader = new FileName2TaxonLoaderFNA(input);
     	Filename2TaxonFinder filenameTaxon = new Filename2TaxonFinder(filename2Taxonloader.getValuesMap());
