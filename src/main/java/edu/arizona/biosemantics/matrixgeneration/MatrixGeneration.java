@@ -95,7 +95,7 @@ public class MatrixGeneration extends ProcessSubject {
         TaxonRank topRank = trc.getParentRank(TaxonRank.valueOf(existTopRank.toUpperCase()));        
    //     setCurrentMessage("pesudoroot1");
         DescriptionParser rootParser = new DescriptionParser(rootName, topRank, filenameTaxon, inputPath);  // sigPluMap,  //by Jing Liu Oct. 31, 2013
-        ITaxon rootTaxon = rootParser.parsePeudoTaxon();
+        ITaxon rootTaxon = rootParser.parsePseudoTaxon();
         TaxonHierarchy h = new TaxonHierarchy(rootTaxon);
         List<String> nonEmptyRankList = filenameTaxon.getNonEmptyRankList();
  //       setCurrentMessage("pesudoroot2");
@@ -135,10 +135,18 @@ public class MatrixGeneration extends ProcessSubject {
                 ranklist = filenameTaxon.getTaxonRankList(file);
                 TaxonRank botRank = TaxonRank.valueOf(r.toUpperCase());
                 String bottomName = filenameTaxon.getTaxonValues(file).get(r);
+                String authorName = filenameTaxon.getTaxonValues(file).get("author");
+                String date = filenameTaxon.getTaxonValues(file).get("date");
                 DescriptionParser bottomParser;
                 if (r.equals("species")) {
                     String genusName = filenameTaxon.getTaxonValues(file).get("genus");
                     bottomName = genusName + "_" + bottomName;
+                }
+                if(authorName != null) {
+                	bottomName += "_" + authorName; 
+                	if(date != null) {
+                		bottomName += "_" + date;
+                	}
                 }
                 System.out.println("Taxon name: " + bottomName);
                 System.out.println("File name: " + file);

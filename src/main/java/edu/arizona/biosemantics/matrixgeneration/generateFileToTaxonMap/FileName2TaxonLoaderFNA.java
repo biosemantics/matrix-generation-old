@@ -54,8 +54,16 @@ public class FileName2TaxonLoaderFNA extends FileName2TaxonLoader {
     static XPath varietypath;
     static XPath descriptionpath;
 
+    static String authorstr = "";
+    static String datestr = "";
+    static XPath authorpath;
+    static XPath datepath;
+    
     static {
         try {
+        	authorpath = XPath.newInstance("//meta/source/author");
+        	datepath = XPath.newInstance("//meta/source/date");
+        	
             familypath = XPath.newInstance("//taxon_identification[@status='ACCEPTED']/family_name");
             subfamilypath = XPath.newInstance("//taxon_identification[@status='ACCEPTED']/subfamily_name");
             tribepath = XPath.newInstance("//taxon_identification[@status='ACCEPTED']/tribe_name");
@@ -100,6 +108,18 @@ public class FileName2TaxonLoaderFNA extends FileName2TaxonLoader {
             }
             values.put("filename", xml.getName());
 
+            Element author = (Element) authorpath.selectSingleNode(root);
+            if(author != null) {
+            	authorstr = author.getTextNormalize();
+            	values.put("author", authorstr);
+            }
+            
+            Element date = (Element) datepath.selectSingleNode(root);
+            if(date != null) {
+            	datestr = date.getTextNormalize();
+            	values.put("date", datestr);
+            }
+            
             values.put("domain", domainstr);
             values.put("kingdom", kingdomstr);
             values.put("phylum", phylumstr);

@@ -168,7 +168,7 @@ public class DescriptionParser {
 	/**added by Jing Liu
 	 * Parses the file of the taxon.
 	 */
-	public ITaxon parsePeudoTaxon() {
+	public ITaxon parsePseudoTaxon() {
 		ITaxon taxon = TaxonFactory.getTaxonObject(taxonRank, taxonName);
 		return taxon;
 	}
