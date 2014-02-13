@@ -75,7 +75,7 @@ public class FileName2TaxonLoaderFNA extends FileName2TaxonLoader {
             speciespath = XPath.newInstance("//taxon_identification[@status='ACCEPTED']/species_name");
             subspeciespath = XPath.newInstance("//taxon_identification[@status='ACCEPTED']/subspecies_name");
             varietypath = XPath.newInstance("//taxon_identification[@status='ACCEPTED']/variety_name");
-            descriptionpath = XPath.newInstance("//description");
+            descriptionpath = XPath.newInstance("//description[@type='morphology']");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
@@ -103,8 +103,11 @@ public class FileName2TaxonLoaderFNA extends FileName2TaxonLoader {
             Element root = doc.getRootElement();
             if (descriptionpath.selectNodes(root).size() > 0) {
                 values.put("hasdescription", "1");
+                if(descriptionpath.selectNodes(root).size() > 1)
+                	System.out.println("has " + descriptionpath.selectNodes(root).size() + " nodes");
             } else {
                 values.put("hasdescription", "0");
+                System.out.println("didnt have a description");
             }
             values.put("filename", xml.getName());
 

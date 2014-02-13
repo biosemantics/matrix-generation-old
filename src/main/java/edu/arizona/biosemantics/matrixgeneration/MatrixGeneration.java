@@ -127,6 +127,10 @@ public class MatrixGeneration extends ProcessSubject {
         HashMap valuemap = filenameTaxon.getValueMap();
         setCurrentPercentage(0);
 
+        //added to map jings taxon names to 'taxon concept' names (name + author + date) for replacement during output
+        HashMap<String, String> taxonNameMap = new HashMap<String, String>();
+        h.setTaxonNameMap(taxonNameMap);
+        
         for (String r : nonEmptyRankList) {
             List<String> filenames = filenameTaxon.getFilenamesForGivenRank(r);
             for (String file : filenames) {
@@ -138,16 +142,21 @@ public class MatrixGeneration extends ProcessSubject {
                 String authorName = filenameTaxon.getTaxonValues(file).get("author");
                 String date = filenameTaxon.getTaxonValues(file).get("date");
                 DescriptionParser bottomParser;
+                
                 if (r.equals("species")) {
                     String genusName = filenameTaxon.getTaxonValues(file).get("genus");
                     bottomName = genusName + "_" + bottomName;
                 }
+
+                String fullBottomName = bottomName;
                 if(authorName != null) {
-                	bottomName += "_" + authorName; 
+                	fullBottomName += "_" + authorName; 
                 	if(date != null) {
-                		bottomName += "_" + date;
+                		fullBottomName += "_" + date;
                 	}
                 }
+                taxonNameMap.put(bottomName, fullBottomName);
+                
                 System.out.println("Taxon name: " + bottomName);
                 System.out.println("File name: " + file);
                 if(!fileTaxonMap.containsKey(file))

@@ -2,6 +2,7 @@ package edu.arizona.biosemantics.matrixgeneration.taxonomy;
 
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,6 +14,7 @@ import edu.arizona.biosemantics.matrixgeneration.tree.TreeNode;
 public class TaxonHierarchy {
 
     private Tree<ITaxon> hierarchy;
+	private HashMap<String, String> taxonNameMap;
 
     public TaxonHierarchy() {
         this.hierarchy = new Tree<ITaxon>();
@@ -249,4 +251,12 @@ public class TaxonHierarchy {
             System.out.println(element.getName() + " " + element.getTaxonRank().toString());
         }
     }
+
+	public void setTaxonNameMap(HashMap<String, String> taxonNameMap) {
+		this.taxonNameMap = taxonNameMap;
+	}
+	
+	public HashMap<String, String> getTaxonNameMap() {
+		return taxonNameMap;
+	}
 }

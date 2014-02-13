@@ -299,7 +299,14 @@ public class TaxonCharacterMatrix {
                     row.add(ConversionUtil.join(stateStrings, "|"));
                 } else {
                     List<String> row = new ArrayList<String>();
-                    row.add(taxon.getName());	//The first element of a row is the name of the taxon.
+                    
+                	//The first element of a row is the name of the taxon.
+                    HashMap<String, String> taxonNameMap = this.hierarchy.getTaxonNameMap();
+                    if(taxonNameMap.containsKey(taxon.getName()))
+                    	row.add(taxonNameMap.get(taxon.getName()));
+                    else
+                    	row.add(taxon.getName());
+
                     List<String> stateStrings = new ArrayList<String>();
                     for (IState state : stateList) {
                         if (state instanceof SingletonState) {
