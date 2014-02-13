@@ -6,6 +6,7 @@ package edu.arizona.biosemantics.matrixgeneration.generateFileToTaxonMap;
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -53,6 +54,7 @@ public class FileName2TaxonLoaderFNA extends FileName2TaxonLoader {
     static XPath subspeciespath;
     static XPath varietypath;
     static XPath descriptionpath;
+	static XPath descriptionpath2;
 
     static String authorstr = "";
     static String datestr = "";
@@ -76,6 +78,7 @@ public class FileName2TaxonLoaderFNA extends FileName2TaxonLoader {
             subspeciespath = XPath.newInstance("//taxon_identification[@status='ACCEPTED']/subspecies_name");
             varietypath = XPath.newInstance("//taxon_identification[@status='ACCEPTED']/variety_name");
             descriptionpath = XPath.newInstance("//description[@type='morphology']");
+            descriptionpath2 = XPath.newInstance("//description[@type='morphology']/statement/text");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
@@ -91,6 +94,9 @@ public class FileName2TaxonLoaderFNA extends FileName2TaxonLoader {
         super(inputfilepath);
     }
 
+    private int number = 0;
+    private int number2 = 0;
+    
     @Override
     /**
      * use XPath to extract values from XML file need filename, hasdescription,
@@ -105,6 +111,34 @@ public class FileName2TaxonLoaderFNA extends FileName2TaxonLoader {
                 values.put("hasdescription", "1");
                 if(descriptionpath.selectNodes(root).size() > 1)
                 	System.out.println("has " + descriptionpath.selectNodes(root).size() + " nodes");
+                
+                System.out.println("size: " + descriptionpath.selectNodes(root).size());
+                
+                List<Element> nodes= descriptionpath2.selectNodes(root);
+                List<Element> descriptions =  descriptionpath.selectNodes(root);
+                if(descriptions.size() > 1) {
+                	System.out.println("has more than 1");
+                	for(int i=1; i<descriptions.size(); i++) {
+                		if(descriptions.get(i).getChildren("statement").isEmpty()) {
+                			number++;
+                		}
+                	}
+                }
+                
+                boolean isEmpty = true;
+                if(descriptions.size() >= 1) {
+                	for(int i=0; i<descriptions.size(); i++) 
+                		isEmpty &= descriptions.get(i).getChildren("statement").isEmpty();
+                		//if(descriptions.get(i).getChildren("statement").isEmpty())
+	                	//	number2++;
+                }
+                if(isEmpty)
+                	number2++;
+                System.out.println("Number: " + number);
+                System.out.println("Number2: " + number2);
+
+                //number += descriptionpath.selectNodes(root).size();
+            
             } else {
                 values.put("hasdescription", "0");
                 System.out.println("didnt have a description");
