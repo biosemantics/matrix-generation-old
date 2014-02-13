@@ -150,12 +150,16 @@ public class MatrixGeneration extends ProcessSubject {
 
                 String fullBottomName = bottomName;
                 if(authorName != null) {
+                	if(authorName.length() > 10) {
+                		authorName = authorName.replaceAll("\\p{Lower}+", ".");
+                		authorName = authorName.replaceAll("\\s+", "");
+                	}
                 	fullBottomName += "_" + authorName; 
                 	if(date != null) {
                 		fullBottomName += "_" + date;
                 	}
                 }
-                taxonNameMap.put(bottomName, fullBottomName);
+                taxonNameMap.put(bottomName.trim().toLowerCase(), fullBottomName.trim());
                 
                 System.out.println("Taxon name: " + bottomName);
                 System.out.println("File name: " + file);

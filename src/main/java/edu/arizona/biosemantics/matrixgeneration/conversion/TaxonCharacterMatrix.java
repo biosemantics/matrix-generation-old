@@ -302,8 +302,9 @@ public class TaxonCharacterMatrix {
                     
                 	//The first element of a row is the name of the taxon.
                     HashMap<String, String> taxonNameMap = this.hierarchy.getTaxonNameMap();
-                    if(taxonNameMap.containsKey(taxon.getName()))
-                    	row.add(taxonNameMap.get(taxon.getName()));
+                    String name = taxon.getName();
+                    if(taxonNameMap.containsKey(name.trim().toLowerCase()))
+                    	row.add(taxonNameMap.get(name.trim().toLowerCase()));
                     else
                     	row.add(taxon.getName());
 
