@@ -9,6 +9,17 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+	
+	<repositories>
+		<repository>
+			<id>playground-releases</id>
+			<url>http://128.196.105.149:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
+			<id>playground-snapshots</id>
+			<url>http://128.196.105.149:8081/nexus/content/repositories/snapshots/</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -16,7 +27,6 @@
 			<artifactId>jaxen-core</artifactId>
 			<version>1.0-FCS</version>
 		</dependency>
-
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -32,7 +42,6 @@
 			<artifactId>saxpath</artifactId>
 			<version>1.0-FCS</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.hp.hpl.jena</groupId>
 			<artifactId>jena</artifactId>
@@ -93,9 +102,9 @@
 
 	<distributionManagement>
 		<repository>
-			<id>local</id>
-			<name>local repo</name>
-			<url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+			<id>playground</id>
+			<name>playground@SBS</name>
+			<url>http://128.196.105.149:8081/nexus/content/repositories/snapshots/</url>
 		</repository>
 	</distributionManagement>
 </project>
