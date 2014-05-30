@@ -1,6 +1,7 @@
 package edu.arizona.biosemantics.matrixgeneration.generateFileToTaxonMap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
 
+import edu.arizona.biosemantics.matrixgeneration.MatrixGeneration;
 import edu.arizona.biosemantics.matrixgeneration.taxonomy.TaxonRank;
 
 /**
@@ -30,20 +32,8 @@ public class Filename2TaxonFinder{
      * Create a new FilenameTaxonDao and add ranking list.
      */
     public Filename2TaxonFinder(HashMap valuesMap) {
-        taxonRank = new ArrayList<String>();
-        String[] list = new String[]{"domain", "kingdom", "phylum",
-            "subphylum", "superdivision", "division", "superclass",
-            "class", "subclass", "superorder", "order", "suborder",
-            "superfamily", "family", "subfamily", "tribe", "subtribe",
-            "genus", "subgenus", "section", "subsection", "species",
-            "subspecies", "variety"};
-        for (String s : list) {
-            taxonRank.add(s);
-        }        
-        
-        this.valuesMap = valuesMap;  
-        
-        
+        taxonRank = Arrays.asList(MatrixGeneration.ranks);
+        this.valuesMap = valuesMap; 
     }
 
     public HashMap getValueMap(){
@@ -71,104 +61,13 @@ public class Filename2TaxonFinder{
     public List<String> getTaxonRankNameList(String filename) {
         Map<String, String> result = getTaxonValues(filename);
         List<String> ranknamelist = new LinkedList<String>();
-        String rank;
         Map<String, String> values = getTaxonValues(filename);
-        rank = values.get("domain");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("kingdom");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("phylum");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("subphylum");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("superdivision");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("division");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("superclass");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("class");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("subclass");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("superorder");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("order");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("suborder");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("superfamily");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("family");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("subfamily");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("tribe");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("subtribe");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("genus");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("subgenus");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("section");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("subsection");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("species");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("subspecies");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
-        rank = values.get("variety");
-        if (!rank.isEmpty()) {
-            ranknamelist.add(rank);
-        }
+        
+		for(String rank : MatrixGeneration.ranks) {
+			String rankName = values.get(rank);
+			if(!rankName.isEmpty())
+				ranknamelist.add(rankName);
+		}
         return ranknamelist;
     }
 
@@ -181,103 +80,12 @@ public class Filename2TaxonFinder{
     public List<String> getTaxonRankList(String filename) {
         Map<String, String> result = getTaxonValues(filename);
         List<String> ranklist = new LinkedList<String>();
-        String rank;
-        rank = result.get("domain");
-        if (!rank.isEmpty()) {
-            ranklist.add("domain");
-        }
-        rank = result.get("kingdom");
-        if (!rank.isEmpty()) {
-            ranklist.add("kingdom");
-        }
-        rank = result.get("phylum");
-        if (!rank.isEmpty()) {
-            ranklist.add("phylum");
-        }
-        rank = result.get("subphylum");
-        if (!rank.isEmpty()) {
-            ranklist.add("subphylum");
-        }
-        rank = result.get("superdivision");
-        if (!rank.isEmpty()) {
-            ranklist.add("superdivision");
-        }
-        rank = result.get("division");
-        if (!rank.isEmpty()) {
-            ranklist.add("division");
-        }
-        rank = result.get("superclass");
-        if (!rank.isEmpty()) {
-            ranklist.add("superclass");
-        }
-        rank = result.get("class");
-        if (!rank.isEmpty()) {
-            ranklist.add("class");
-        }
-        rank = result.get("subclass");
-        if (!rank.isEmpty()) {
-            ranklist.add("subclass");
-        }
-        rank = result.get("superorder");
-        if (!rank.isEmpty()) {
-            ranklist.add("superorder");
-        }
-        rank = result.get("order");
-        if (!rank.isEmpty()) {
-            ranklist.add("order");
-        }
-        rank = result.get("suborder");
-        if (!rank.isEmpty()) {
-            ranklist.add("suborder");
-        }
-        rank = result.get("superfamily");
-        if (!rank.isEmpty()) {
-            ranklist.add("superfamily");
-        }
-        rank = result.get("family");
-        if (!rank.isEmpty()) {
-            ranklist.add("family");
-        }
-        rank = result.get("subfamily");
-        if (!rank.isEmpty()) {
-            ranklist.add("subfamily");
-        }
-        rank = result.get("tribe");
-        if (!rank.isEmpty()) {
-            ranklist.add("tribe");
-        }
-        rank = result.get("subtribe");
-        if (!rank.isEmpty()) {
-            ranklist.add("subtribe");
-        }
-        rank = result.get("genus");
-        if (!rank.isEmpty()) {
-            ranklist.add("genus");
-        }
-        rank = result.get("subgenus");
-        if (!rank.isEmpty()) {
-            ranklist.add("subgenus");
-        }
-        rank = result.get("section");
-        if (!rank.isEmpty()) {
-            ranklist.add("section");
-        }
-        rank = result.get("subsection");
-        if (!rank.isEmpty()) {
-            ranklist.add("subsection");
-        }
-        rank = result.get("species");
-        if (!rank.isEmpty()) {
-            ranklist.add("species");
-        }
-        rank = result.get("subspecies");
-        if (!rank.isEmpty()) {
-            ranklist.add("subspecies");
-        }
-        rank = result.get("variety");
-        if (!rank.isEmpty()) {
-            ranklist.add("variety");
-        }
+        
+        for(String rank : MatrixGeneration.ranks) {
+			String rankName = result.get(rank);
+			if(!rankName.isEmpty())
+				ranklist.add(rank);
+		}
         return ranklist;
     }
 
@@ -291,78 +99,12 @@ public class Filename2TaxonFinder{
         String result = "";
 
         Map<String, String> values = getTaxonValues(filename);
-        if (values.get("domain").length() != 0) {
-            result = "domain";
-        }
-        if (values.get("kingdom").length() != 0) {
-            result = "kingdom";
-        }
-        if (values.get("phylum").length() != 0) {
-            result = "phylum";
-        }
-        if (values.get("subphylum").length() != 0) {
-            result = "subphylum";
-        }
-        if (values.get("superdivision").length() != 0) {
-            result = "superdivision";
-        }
-        if (values.get("division").length() != 0) {
-            result = "division";
-        }
-        if (values.get("superclass").length() != 0) {
-            result = "superclass";
-        }
-        if (values.get("class").length() != 0) {
-            result = "class";
-        }
-        if (values.get("subclass").length() != 0) {
-            result = "subclass";
-        }
-        if (values.get("superorder").length() != 0) {
-            result = "superorder";
-        }
-        if (values.get("order").length() != 0) {
-            result = "order";
-        }
-        if (values.get("suborder").length() != 0) {
-            result = "suborder";
-        }
-        if (values.get("superfamily").length() != 0) {
-            result = "superfamily";
-        }
-        if (values.get("family").length() != 0) {
-            result = "family";
-        }
-        if (values.get("subfamily").length() != 0) {
-            result = "subfamily";
-        }
-        if (values.get("tribe").length() != 0) {
-            result = "tribe";
-        }
-        if (values.get("subtribe").length() != 0) {
-            result = "subtribe";
-        }
-        if (values.get("genus").length() != 0) {
-            result = "genus";
-        }
-        if (values.get("subgenus").length() != 0) {
-            result = "subgenus";
-        }
-        if (values.get("section").length() != 0) {
-            result = "section";
-        }
-        if (values.get("subsection").length() != 0) {
-            result = "subsection";
-        }
-        if (values.get("species").length() != 0) {
-            result = "species";
-        }
-        if (values.get("subspecies").length() != 0) {
-            result = "subspecies";
-        }
-        if (values.get("variety").length() != 0) {
-            result = "variety";
-        }
+        
+        for(String rank : MatrixGeneration.ranks) {
+			String rankName = values.get(rank);
+			if(!rankName.isEmpty())
+				result = rank;
+		}
         return result;
     }
 

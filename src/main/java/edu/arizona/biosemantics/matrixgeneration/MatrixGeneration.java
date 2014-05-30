@@ -38,6 +38,24 @@ import java.util.TreeMap;
  */
 public class MatrixGeneration extends ProcessSubject {
 
+	public static String[] ranks = { 
+		"superdomain", "domain", "subdomain",
+		"superkingdom", "kingdom", "subkingdom", 
+		"superphylum", "phylum", "subphylum", 
+		"superdivision", "division", "subdivision", 
+		"superclass", "class", "subclass", 
+		"superorder", "order", "suborder", 
+		"superfamily", "family", "subfamily",
+		"supertribe", "tribe", "subtribe", 
+		"supergenus", "genus", "subgenus", 
+		"supersection", "section", "subsection", 
+		"superseries", "series", "subseries", 
+		"superspecies", "species", "subspecies", 
+		"supervariety", "variety", "subvarietas", 
+		"superforma", "forma", "subforma", 
+		"supergroup", "group", "subgroup", 
+		"unranked"};
+	
     private Filename2TaxonFinder filenameTaxon;
    // private HashMap sigPluMap;    //by Jing Liu Oct. 31, 2013
     private String inputPath;
@@ -148,7 +166,28 @@ public class MatrixGeneration extends ProcessSubject {
                     bottomName = genusName + "_" + bottomName;
                 }
 
-                String fullBottomName = bottomName;
+                String fullName = "";
+                Map<String, String> values = filenameTaxon.getTaxonValues(file);
+                for(String rank : MatrixGeneration.ranks) {
+                	String rankName = values.get(rank);
+                	String rankAuthority = values.get(rank + "RankAuthority");
+                	String rankDate = values.get(rank + "RankDate");
+                	if(rankName != null && !rankName.isEmpty()) {
+                		fullName += rank + "=" + rankName;
+                		if(rankAuthority != null & !rankAuthority.isEmpty())
+                			fullName += ",authority=" + rankAuthority;
+                		if(rankDate != null & !rankDate.isEmpty())
+                			fullName += ",date=" + rankDate;
+                    	fullName += ";";
+                	}
+                }
+                fullName = fullName.substring(0, fullName.length() - 1);
+                fullName += ":authorName=" + authorName;
+                fullName += ",date=" + date;
+                
+                taxonNameMap.put(bottomName.trim().toLowerCase(), fullName.trim());
+                
+                /*String fullBottomName = bottomName;
                 if(authorName != null) {
                 	if(authorName.length() > 10) {
                 		authorName = authorName.replaceAll("\\p{Lower}+", ".");
@@ -160,6 +199,7 @@ public class MatrixGeneration extends ProcessSubject {
                 	}
                 }
                 taxonNameMap.put(bottomName.trim().toLowerCase(), fullBottomName.trim());
+                */
                 
                 System.out.println("Taxon name: " + bottomName);
                 System.out.println("File name: " + file);
@@ -197,6 +237,7 @@ public class MatrixGeneration extends ProcessSubject {
     	Filename2TaxonFinder filenameTaxon = new Filename2TaxonFinder(filename2Taxonloader.getValuesMap());
     	filename2Taxonloader.loadValueMap();
     	
+    	System.out.println(filenameTaxon.getValueMap());
     	
     	MatrixGeneration mg = new MatrixGeneration(input, filenameTaxon.getValueMap(), new File(output));
     	mg.setIsPeudoroot(true);

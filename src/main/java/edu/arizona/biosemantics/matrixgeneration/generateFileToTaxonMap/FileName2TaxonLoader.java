@@ -10,6 +10,7 @@ import java.util.Hashtable;
 
 import org.apache.log4j.Logger;
 
+import edu.arizona.biosemantics.matrixgeneration.MatrixGeneration;
 import edu.arizona.biosemantics.matrixgeneration.processListen.ProcessSubject;
 
 public abstract class FileName2TaxonLoader extends ProcessSubject{
@@ -40,31 +41,14 @@ public abstract class FileName2TaxonLoader extends ProcessSubject{
     protected void resetValues() {
         values.put("filename", "");
         values.put("hasdescription", "");
-        values.put("domain", "");
-        values.put("kingdom", "");
-        values.put("phylum", "");
-        values.put("subphylum", "");
-        values.put("superdivision", "");
-        values.put("division", "");
-        values.put("subdivision", "");
-        values.put("superclass", "");
-        values.put("class", "");
-        values.put("subclass", "");
-        values.put("superorder", "");
-        values.put("order", "");
-        values.put("suborder", "");
-        values.put("superfamily", "");
-        values.put("family", "");
-        values.put("subfamily", "");
-        values.put("tribe", "");
-        values.put("subtribe", "");
-        values.put("genus", "");
-        values.put("subgenus", "");
-        values.put("section", "");
-        values.put("subsection", "");
-        values.put("species", "");
-        values.put("subspecies", "");
-        values.put("variety", "");
+        values.put("author", "");
+        values.put("date", "");
+        
+        for(String rank : MatrixGeneration.ranks) {
+			values.put(rank, "");
+			values.put(rank + "RankAuthority", "");
+			values.put(rank + "RankDate", "");
+		}
     }
 
     protected void populateFilename2TaxonTable() {
