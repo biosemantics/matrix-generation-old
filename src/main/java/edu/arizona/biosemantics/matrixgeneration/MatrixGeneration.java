@@ -182,7 +182,7 @@ public class MatrixGeneration extends ProcessSubject {
                 	}
                 }
                 fullName = fullName.substring(0, fullName.length() - 1);
-                fullName += ":authorName=" + authorName;
+                fullName += ":author=" + authorName;
                 fullName += ",date=" + date;
                 
                 taxonNameMap.put(bottomName.trim().toLowerCase(), fullName.trim());
