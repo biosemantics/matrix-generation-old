@@ -18,8 +18,8 @@ public class Subspecies extends TaxonBase {
 	 * Create a new subspecies with a given name.
 	 * @param name
 	 */
-	public Subspecies(String name) {
-		super(TaxonRank.SUBSPECIES, name);
+	public Subspecies(String sourceFile, String name) {
+		super(sourceFile,TaxonRank.SUBSPECIES, name);
 	}
 
 }

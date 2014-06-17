@@ -18,7 +18,7 @@ public class Subtribe extends TaxonBase {
 	 * Creates a new Subtribe with a given name.
 	 * @param name
 	 */
-	public Subtribe(String name) {
-		super(TaxonRank.SUBTRIBE, name);
+	public Subtribe(String sourceFile, String name) {
+		super(sourceFile,TaxonRank.SUBTRIBE, name);
 	}
 }

@@ -25,6 +25,7 @@ import edu.arizona.biosemantics.matrixgeneration.tree.TreeNode;
  */
 public class TaxonBase implements ITaxon {
 
+	protected String sourceFile;
 	protected String name;
 	protected TaxonRank taxonRank;
 	protected Map<Structure, Map<Character, IState>> charMap;
@@ -52,7 +53,8 @@ public class TaxonBase implements ITaxon {
 	 * @param rank The taxonomical rank.
 	 * @param name The name of the taxon.
 	 */
-	public TaxonBase(TaxonRank rank, String name) {
+	public TaxonBase(String sourceFile, TaxonRank rank, String name) {
+		this.sourceFile = sourceFile;
 		this.taxonRank = rank;
 		this.name = name;
 		this.charMap = new TreeMap<Structure, Map<Character, IState>>();
@@ -288,6 +290,11 @@ public class TaxonBase implements ITaxon {
 		sb.append(", taxonRank=").append(taxonRank);
 		sb.append("]");
 		return sb.toString();
+	}
+
+	@Override
+	public String getSourceFile() {
+		return sourceFile;
 	}
 	
 }

@@ -248,6 +248,7 @@ public class TaxonCharacterMatrix {
             e.printStackTrace();
         }
         List<String> header = new ArrayList<String>();
+        header.add("Source File");
         header.add("Name");
         Map<ITaxon, List<String>> rows = new TreeMap<ITaxon, List<String>>(new TaxonComparator());
         for (String charName : table.keySet()) {
@@ -260,6 +261,7 @@ public class TaxonCharacterMatrix {
                     List<String> row = rows.get(taxon);
                     if (row == null) {
                         row = new ArrayList<String>();
+                        row.add(taxon.getSourceFile());
                         row.add(taxon.getName());
                     }
                     List<String> stateStrings = new ArrayList<String>();
@@ -300,14 +302,17 @@ public class TaxonCharacterMatrix {
                 } else {
                     List<String> row = new ArrayList<String>();
                     
+                    row.add(taxon.getSourceFile());
+                    
                 	//The first element of a row is the name of the taxon.
                     HashMap<String, String> taxonNameMap = this.hierarchy.getTaxonNameMap();
                     String name = taxon.getName();
                     if(taxonNameMap.containsKey(name.trim().toLowerCase()))
                     	row.add(taxonNameMap.get(name.trim().toLowerCase()));
-                    else
+                    else {
                     	row.add(taxon.getName());
-
+                    }
+                    	
                     List<String> stateStrings = new ArrayList<String>();
                     for (IState state : stateList) {
                         if (state instanceof SingletonState) {

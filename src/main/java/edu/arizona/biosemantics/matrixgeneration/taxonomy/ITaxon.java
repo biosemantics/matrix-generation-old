@@ -20,6 +20,8 @@ import edu.arizona.biosemantics.matrixgeneration.tree.Tree;
  */
 public interface ITaxon {
 
+	public String getSourceFile();
+	
 	/**
 	 * Get the name of this taxon.
 	 * @return

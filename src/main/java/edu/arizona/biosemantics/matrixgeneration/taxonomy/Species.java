@@ -18,8 +18,8 @@ public class Species extends TaxonBase implements ITaxon {
 	 * Create a new Species taxon object with a name.
 	 * @param name The scientific name of this species.
 	 */
-	public Species(String name) {
-		super(TaxonRank.SPECIES, name);
+	public Species(String sourceFile, String name) {
+		super(sourceFile,TaxonRank.SPECIES, name);
 	}
 
 }

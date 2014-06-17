@@ -7,25 +7,25 @@ package edu.arizona.biosemantics.matrixgeneration.taxonomy;
  */
 public class TaxonFactory {
 	
-	public static TaxonBase getTaxonObject(TaxonRank rank, String name) {
+	public static TaxonBase getTaxonObject(String sourceFile, TaxonRank rank, String name) {
 
 		switch (rank) {
 		case FAMILY:
-			return new Family(name);
+			return new Family(sourceFile, name);
 		case GENUS:
-			return new Genus(name);
+			return new Genus(sourceFile, name);
 		case SPECIES:
-			return new Species(name);
+			return new Species(sourceFile, name);
 		case SUBGENUS:
-			return new Subgenus(name);
+			return new Subgenus(sourceFile, name);
 		case SUBSPECIES:
-			return new Subspecies(name);
+			return new Subspecies(sourceFile, name);
 		case SUBTRIBE:
-			return new Subtribe(name);
+			return new Subtribe(sourceFile, name);
 		case TRIBE:
-			return new Tribe(name);
+			return new Tribe(sourceFile, name);
 		default:
-			return new TaxonBase(rank, name);
+			return new TaxonBase(sourceFile, rank, name);
 		}
 	}
 

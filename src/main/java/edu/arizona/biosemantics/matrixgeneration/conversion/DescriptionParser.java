@@ -86,7 +86,7 @@ public class DescriptionParser {
 	 * Parses the file of the taxon.
 	 */
 	public ITaxon parseTaxon() {
-		ITaxon taxon = TaxonFactory.getTaxonObject(taxonRank, taxonName);
+		ITaxon taxon = TaxonFactory.getTaxonObject(filename, taxonRank, taxonName);
 		try {
 			Unmarshaller unmarshaller = annotationContext.createUnmarshaller();
 			this.filename = filenameTaxon.getFilenameForDescription(taxonRank, taxonName);
@@ -125,7 +125,7 @@ public class DescriptionParser {
 	 * Parses the file of the taxon.
 	 */
 	public ITaxon parseTaxon(String filename){
-		ITaxon taxon = TaxonFactory.getTaxonObject(taxonRank, taxonName);
+		ITaxon taxon = TaxonFactory.getTaxonObject(filename, taxonRank, taxonName);
 		try {
 			Unmarshaller unmarshaller = annotationContext.createUnmarshaller();
 			//this.filename = filenameTaxon.getFilenameForDescription(taxonRank, taxonName);
@@ -169,7 +169,7 @@ public class DescriptionParser {
 	 * Parses the file of the taxon.
 	 */
 	public ITaxon parsePseudoTaxon() {
-		ITaxon taxon = TaxonFactory.getTaxonObject(taxonRank, taxonName);
+		ITaxon taxon = TaxonFactory.getTaxonObject(filename, taxonRank, taxonName);
 		return taxon;
 	}
 	

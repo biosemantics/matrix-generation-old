@@ -19,8 +19,8 @@ public class Subgenus extends TaxonBase {
 	 * Creates a new subgenus with a given name.
 	 * @param name
 	 */
-	public Subgenus(String name) {
-		super(TaxonRank.SUBGENUS, name);
+	public Subgenus(String sourceFile, String name) {
+		super(sourceFile,TaxonRank.SUBGENUS, name);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -18,8 +18,8 @@ public class Family extends TaxonBase implements ITaxon {
 	 * Create a new Family taxon object.
 	 * @param name The scientific name of the family.
 	 */
-	public Family(String name) {
-		super(TaxonRank.FAMILY, name);
+	public Family(String sourceFile, String name) {
+		super(sourceFile, TaxonRank.FAMILY, name);
 	}
 
 }

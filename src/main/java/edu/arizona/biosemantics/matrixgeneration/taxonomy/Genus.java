@@ -18,8 +18,8 @@ public class Genus extends TaxonBase implements ITaxon {
 	 * Create a new Genus taxon object with a name.
 	 * @param name The scientific name of this genus.
 	 */
-	public Genus(String name) {
-		super(TaxonRank.GENUS, name);
+	public Genus(String sourceFile, String name) {
+		super(sourceFile,TaxonRank.GENUS, name);
 	}
 
 }

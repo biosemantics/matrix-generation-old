@@ -17,8 +17,8 @@ public class Tribe extends TaxonBase {
 	 * Creates a tribe with a given name.
 	 * @param name
 	 */
-	public Tribe(String name) {
-		super(TaxonRank.TRIBE, name);
+	public Tribe(String sourceFile, String name) {
+		super(sourceFile, TaxonRank.TRIBE, name);
 	}
 
 }
