@@ -41,7 +41,7 @@ public class TestTaxonHierarchy extends TestCase{
 	
 	@Test
 	public final void testAddOneTaxon() {
-		Family family = new Family("testFamily");
+		Family family = new Family("filename", "testFamily");
 		try {
 			th.addSubTaxon(family);
 		} catch (SubTaxonException e) {
@@ -53,14 +53,14 @@ public class TestTaxonHierarchy extends TestCase{
 	
 	@Test
 	public final void testAddGenusUnderFamily() {
-		ITaxon family = new Family("testFamily");
+		ITaxon family = new Family("filename","testFamily");
 		try {
 			th.addSubTaxon(family);
 		} catch (SubTaxonException e) {
 			e.printStackTrace();
 		}
 		assertTrue(th.getHierarchy().getRoot().getElement().equals(family));
-		ITaxon genus = new Genus("testGenus");
+		ITaxon genus = new Genus("filename","testGenus");
 		try {
 			th.addSubTaxon(genus);
 		} catch (SubTaxonException e) {
@@ -73,14 +73,14 @@ public class TestTaxonHierarchy extends TestCase{
 	
 	@Test
 	public final void testAddSpeciesUnderGenusWithFamily() {
-		ITaxon family = new Family("testFamily");
+		ITaxon family = new Family("filename","testFamily");
 		try {
 			th.addSubTaxon(family);
 		} catch (SubTaxonException e2) {
 			e2.printStackTrace();
 		}
 		assertTrue(th.getHierarchy().getRoot().getElement().equals(family));
-		ITaxon genus = new Genus("testGenus");
+		ITaxon genus = new Genus("filename","testGenus");
 		try {
 			th.addSubTaxon(genus);
 		} catch (SubTaxonException e1) {
@@ -88,7 +88,7 @@ public class TestTaxonHierarchy extends TestCase{
 		}
 		ITaxon t = th.getHierarchy().contains(genus).getElement();
 		assertTrue(t.equals(genus));
-		ITaxon species = new Species("testSpecies");
+		ITaxon species = new Species("filename","testSpecies");
 		try {
 			th.addSubTaxon(genus.getName(), TaxonRank.GENUS, species);
 		} catch (Exception e) {
